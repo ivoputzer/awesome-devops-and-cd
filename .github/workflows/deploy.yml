@@ -8,9 +8,9 @@ jobs:
       with:
         ref: refs/heads/master
     - name: Docker build
-      run: docker build --tag awessome-devops-and-cd .
+      run: docker build --tag awesome-devops-and-cd .
     - name: Docker save
-      run: docker save -o ${GITHUB_SHA}.tar awessome-devops-and-cd
+      run: docker save -o ${GITHUB_SHA}.tar awesome-devops-and-cd
     - name: Ansible deploy
       env:
         ANSIBLE_HOST_KEY_CHECKING: False
