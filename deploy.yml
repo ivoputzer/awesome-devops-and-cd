@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles:
+    - awesome-devops-and-cd

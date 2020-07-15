@@ -1,0 +1,25 @@
+---
+- name: Copy awesome-devops-and-cd docker image
+  copy:
+    src: "{{ github_sha }}.tar"
+    dest: "/tmp/{{ github_sha }}.tar"
+
+- name: Load awesome-devops-and-cd docker image
+  docker_image:
+    source: load
+    force_source: true
+    name: "awesome-devops-and-cd"
+    load_path: "/tmp/{{ github_sha }}.tar"
+
+- name: Start awesome-devops-and-cd docker container
+  docker_container:
+    state: started
+    image: awesome-devops-and-cd
+    name: awesome-devops-and-cd
+    restart: true
+    env:
+      HTTP_PORT: "80"
+    published_ports:
+      - "80:80"
+    exposed_ports:
+      - "80"

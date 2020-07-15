@@ -1,0 +1,8 @@
+[vagrant]
+192.168.50.4
+
+[vagrant:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_become=true
+ansible_become_user=root
+ansible_sudo_pass=abc123

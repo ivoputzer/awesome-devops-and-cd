@@ -1,0 +1,19 @@
+name: Deploy
+on: [push]
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: refs/heads/master
+    - name: Docker build
+      run: docker build --tag awessome-devops-and-cd .
+    - name: Docker save
+      run: docker save -o ${GITHUB_SHA}.tar awessome-devops-and-cd
+    - name: Ansible deploy
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: False
+        SSH_USER: ${{ secrets.SSH_USER }}
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+      run: ansible-playbook --extra-vars="github_sha=${GITHUB_SHA} ansible_user=${SSH_USER} ansible_password=${SSH_PASSWORD}" -i env/production deploy.yml
