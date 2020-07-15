@@ -6,6 +6,9 @@ stages:
   - build
   - deploy
 
+variables:
+  ANSIBLE_HOST_KEY_CHECKING: False
+
 build:
   stage: build
   image: docker:latest
@@ -21,6 +24,6 @@ build:
 
 deploy:
   stage: deploy
-  image: ansible/ansible
+  image: ubuntu:latest
   script:
     - ansible-playbook --extra-vars="github_commit=${CI_COMMIT_SHA} ansible_user=${SSH_USER} ansible_password=${SSH_PASSWORD}" -i env/production deploy.yml
