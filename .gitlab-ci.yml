@@ -4,17 +4,18 @@ services:
 cache:
   paths:
     - node_modules/
+
 stages:
   - build
   - deploy
 
-  build:
-    stage: build
-    script:
-      - docker build --tag awesome-devops-and-cd .
-      - docker save -o ${CI_COMMIT_SHA}.tar awesome-devops-and-cd
+build:
+  stage: build
+  script:
+    - docker build --tag awesome-devops-and-cd .
+    - docker save -o ${CI_COMMIT_SHA}.tar awesome-devops-and-cd
 
-  deploy:
-    stage: deploy
-    script:
-      - echo "qui va chiamato lo script ansible"
+deploy:
+  stage: deploy
+  script:
+    - echo "qui va chiamato lo script ansible"
