@@ -7,7 +7,7 @@ stages:
   - deploy
 
 variables:
-  ANSIBLE_HOST_KEY_CHECKING: False
+  ANSIBLE_HOST_KEY_CHECKING: "False"
 
 build:
   stage: build
