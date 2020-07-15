@@ -8,6 +8,9 @@ stages:
 
 build:
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
     - docker build --tag awesome-devops-and-cd .
     - docker save -o ${CI_COMMIT_SHA}.tar awesome-devops-and-cd
